@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Petrolinked – Igor Carneiro</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800&amp;family=DM+Sans:wght@300;400;500&amp;display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --blue-deep: #050f24;
+      --blue-mid: #1240ab;
+      --blue-main: #1a56db;
+      --cyan: #00d4ff;
+      --white: #ffffff;
+      --gray: #9ba8bb;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(ellipse 80% 70% at 50% 50%, #0d2260 0%, #050f24 70%);
+      font-family: 'DM Sans', sans-serif;
+      padding: 20px;
+    }
+
+    body::before,
+    body::after {
+      content: '';
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: .3;
+      pointer-events: none;
+    }
+
+    body::before {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, #1a56db, transparent 70%);
+      top: -120px;
+      left: -150px;
+      animation: drift 8s ease-in-out infinite alternate;
+    }
+
+    body::after {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, #00d4ff, transparent 70%);
+      bottom: -100px;
+      right: -100px;
+      animation: drift 8s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes drift {
+      from {
+        transform: translate(0, 0) scale(1);
+      }
+
+      to {
+        transform: translate(30px, 20px) scale(1.08);
+      }
+    }
+
+    .card {
+      width: 100%;
+      max-width: 380px;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, .08),
+        0 24px 64px rgba(0, 0, 0, .6),
+        0 0 48px rgba(26, 86, 219, .2);
+      animation: riseIn .9s cubic-bezier(.22, 1, .36, 1) both;
+    }
+
+    @keyframes riseIn {
+      from {
+        opacity: 0;
+        transform: translateY(40px) scale(.97);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .card-header {
+      position: relative;
+      background: linear-gradient(160deg, #1240ab 0%, #0a1a3a 70%);
+      padding: 28px 24px 80px;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .card-header::before {
+      content: '';
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      border: 48px solid rgba(255, 255, 255, .05);
+      top: -70px;
+      right: -70px;
+    }
+
+    .card-header::after {
+      content: '';
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 32px solid rgba(0, 212, 255, .08);
+      bottom: 30px;
+      left: -50px;
+      animation: spin 18s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .logo-img {
+      height: 40px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      position: relative;
+      z-index: 1;
+      animation: riseIn 1s .1s both;
+    }
+
+    .wave {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 60px;
+    }
+
+    .card-body {
+      background: #0b1830;
+      padding: 0 28px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .avatar-wrap {
+      margin-top: -55px;
+      margin-bottom: 16px;
+      z-index: 2;
+      position: relative;
+      animation: riseIn 1s .2s both;
+    }
+
+    .avatar-img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 4px solid #1a56db;
+      box-shadow: 0 0 0 3px rgba(0, 212, 255, .25), 0 8px 24px rgba(0, 0, 0, .5);
+      display: block;
+    }
+
+    .person-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--white);
+      text-align: center;
+      line-height: 1.1;
+      animation: riseIn 1s .25s both;
+    }
+
+    .person-role {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--cyan);
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      text-align: center;
+      margin-top: 5px;
+      margin-bottom: 20px;
+      animation: riseIn 1s .3s both;
+    }
+
+    .divider {
+      width: 36px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), transparent);
+      margin-bottom: 18px;
+      align-self: flex-start;
+      animation: expandW .8s .4s both;
+    }
+
+    @keyframes expandW {
+      from {
+        width: 0;
+        opacity: 0;
+      }
+
+      to {
+        width: 36px;
+        opacity: 1;
+      }
+    }
+
+    .contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--white);
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, .06);
+      background: rgba(255, 255, 255, .04);
+      transition: background .25s, border-color .25s, transform .2s, box-shadow .2s;
+      animation: riseIn 1s both;
+    }
+
+    .contact-item:nth-child(1) {
+      animation-delay: .35s;
+    }
+
+    .contact-item:nth-child(2) {
+      animation-delay: .42s;
+    }
+
+    .contact-item:nth-child(3) {
+      animation-delay: .49s;
+    }
+
+    .contact-item:nth-child(4) {
+      animation-delay: .56s;
+    }
+
+    .contact-item:nth-child(5) {
+      animation-delay: .63s;
+    }
+
+    .contact-item:hover {
+      background: rgba(26, 86, 219, .2);
+      border-color: rgba(0, 212, 255, .3);
+      transform: translateX(4px);
+      box-shadow: 0 4px 20px rgba(26, 86, 219, .25);
+    }
+
+    .icon-wrap {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #1a56db, #0e3a9e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 3px 10px rgba(26, 86, 219, .4);
+      transition: transform .2s;
+    }
+
+    .contact-item:hover .icon-wrap {
+      transform: scale(1.1) rotate(-5deg);
+    }
+
+    .icon-wrap svg {
+      width: 17px;
+      height: 17px;
+      fill: var(--white);
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact-label {
+      font-size: 9px;
+      font-weight: 500;
+      color: var(--gray);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 1px;
+    }
+
+    .contact-value {
+      font-size: 13px;
+      color: var(--white);
+      line-height: 1.4;
+    }
+
+    .card-footer {
+      background: #070f1e;
+      padding: 16px 24px 20px;
+      border-top: 1px solid rgba(255, 255, 255, .05);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: riseIn 1s .65s both;
+    }
+
+    .footer-logo {
+      height: 28px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      opacity: .8;
+    }
+
+    .footer-badge {
+      font-size: 10px;
+      color: rgba(255, 255, 255, .25);
+      letter-spacing: .6px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <div class="card-header">
+      <img alt="Petrolinked" class="logo-img" src="images/image_1.webp" />
+      <svg class="wave" preserveaspectratio="none" viewbox="0 0 380 60">
+        <path d="M0,25 C70,60 140,0 210,30 C280,60 330,10 380,35 L380,60 L0,60 Z" fill="#0b1830"></path>
+      </svg>
+    </div>
+    <div class="card-body">
+      <div class="avatar-wrap">
+        <img alt="Igor Carneiro" class="avatar-img" src="images/image_2.jpeg" />
+      </div>
+      <div class="person-name">Igor Carneiro</div>
+      <div class="person-role">Diretor Financeiro</div>
+      <div class="divider"></div>
+      <div class="contacts">
+        <a class="contact-item" href="https://wa.me/5571999691394" rel="noopener" target="_blank">
+          <div class="icon-wrap">
+            <svg viewbox="0 0 24 24">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z">
+              </path>
+            </svg>
+          </div>
+          <div class="contact-info">
+            <span class="contact-label">WhatsApp</span>
+            <span class="contact-value">(71) 99969-1394</span>
+          </div>
+        </a>
+        <a class="contact-item" href="tel:+557131429999">
+          <div class="icon-wrap">
+            <svg viewbox="0 0 24 24">
+              <path
+                d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z">
+              </path>
+            </svg>
+          </div>
+          <div class="contact-info">
+            <span class="contact-label">Telefone</span>
+            <span class="contact-value">(71) 3142-9999</span>
+          </div>
+        </a>
+        <a class="contact-item" href="mailto:igor@plkd.com.br">
+          <div class="icon-wrap">
+            <svg viewbox="0 0 24 24">
+              <path
+                d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z">
+              </path>
+            </svg>
+          </div>
+          <div class="contact-info">
+            <span class="contact-label">E-mail</span>
+            <span class="contact-value">igor@plkd.com.br</span>
+          </div>
+        </a>
+        <a class="contact-item" href="https://plkd.com.br" rel="noopener" target="_blank">
+          <div class="icon-wrap">
+            <svg viewbox="0 0 24 24">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z">
+              </path>
+            </svg>
+          </div>
+          <div class="contact-info">
+            <span class="contact-label">Site</span>
+            <span class="contact-value">plkd.com.br</span>
+          </div>
+        </a>
+        <div class="contact-item" style="cursor:default;">
+          <div class="icon-wrap">
+            <svg viewbox="0 0 24 24">
+              <path
+                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z">
+              </path>
+            </svg>
+          </div>
+          <div class="contact-info">
+            <span class="contact-label">Endereço</span>
+            <span class="contact-value">Rua Irecê, 143 – Galpão 1<br />Lauro de Freitas – BA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <img alt="Petrolinked" class="footer-logo" src="images/image_3.webp" />
+      <div class="footer-badge">© 2026 Petrolinked</div>
+    </div>
+  </div>
+</body>
+
+</html>
