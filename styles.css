@@ -17,61 +17,18 @@
 
 body {
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: radial-gradient(ellipse 80% 70% at 50% 50%, #0d2260 0%, #050f24 70%);
+  margin: 0;
+  padding: 0;
+  background: #050f24;
   font-family: 'DM Sans', sans-serif;
-  padding: 20px;
-}
-
-body::before,
-body::after {
-  content: '';
-  position: fixed;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: .3;
-  pointer-events: none;
-}
-
-body::before {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, #1a56db, transparent 70%);
-  top: -120px;
-  left: -150px;
-  animation: drift 8s ease-in-out infinite alternate;
-}
-
-body::after {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, #00d4ff, transparent 70%);
-  bottom: -100px;
-  right: -100px;
-  animation: drift 8s ease-in-out infinite alternate-reverse;
-}
-
-@keyframes drift {
-  from {
-    transform: translate(0, 0) scale(1);
-  }
-
-  to {
-    transform: translate(30px, 20px) scale(1.08);
-  }
 }
 
 .card {
   width: 100%;
-  max-width: 380px;
-  border-radius: 24px;
+  max-width: 100%;
+  border-radius: 0;
   overflow: hidden;
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, .08),
-    0 24px 64px rgba(0, 0, 0, .6),
-    0 0 48px rgba(26, 86, 219, .2);
+  min-height: 100vh;
   animation: riseIn .9s cubic-bezier(.22, 1, .36, 1) both;
 }
 
@@ -143,10 +100,13 @@ body::after {
 
 .card-body {
   background: #0b1830;
-  padding: 0 28px 24px;
+  padding: 0 20px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 480px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .avatar-wrap {
@@ -216,6 +176,7 @@ body::after {
   flex-direction: column;
   gap: 10px;
   width: 100%;
+  max-width: 440px;
 }
 
 .contact-item {
@@ -250,6 +211,10 @@ body::after {
 
 .contact-item:nth-child(5) {
   animation-delay: .63s;
+}
+
+.contact-item:nth-child(6) {
+  animation-delay: .70s;
 }
 
 .contact-item:hover {
@@ -304,13 +269,14 @@ body::after {
 
 .card-footer {
   background: #070f1e;
-  padding: 16px 24px 20px;
+  padding: 16px 24px 28px;
   border-top: 1px solid rgba(255, 255, 255, .05);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  animation: riseIn 1s .65s both;
+  animation: riseIn 1s .75s both;
+  width: 100%;
 }
 
 .footer-logo {
@@ -325,4 +291,29 @@ body::after {
   color: rgba(255, 255, 255, .25);
   letter-spacing: .6px;
   text-transform: uppercase;
+}
+
+/* Botão salvar contato */
+.save-btn {
+  cursor: pointer;
+  border: 1px solid rgba(0, 212, 255, .25);
+  background: rgba(0, 212, 255, .06);
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+}
+
+.save-btn:hover {
+  background: rgba(0, 212, 255, .15) !important;
+  border-color: rgba(0, 212, 255, .45) !important;
+}
+
+.save-btn .icon-wrap {
+  background: linear-gradient(135deg, #00d4ff, #0099bb);
+  box-shadow: 0 3px 10px rgba(0, 212, 255, .3);
+}
+
+.save-btn .contact-value {
+  color: var(--cyan);
+  font-weight: 600;
 }
